@@ -1,0 +1,44 @@
+<!-- William  Storms, Jia-Yi Chen 02.11.19 -->
+<!DOCTYPE html>
+<html>
+	<body>
+		<header>
+			<h1>Welcome to the Galactic Exchange!</h1> 
+		</header>
+                
+		<style>
+                	table, th, td {
+                    		border: 1px solid black;
+                  	}
+                </style>
+
+                <form action="galactic_exchange.cgi" method="get" id = "exchange_form">
+                	<table border = ".5">
+                      		<tr>
+                       			<th>Currency IN</th>
+                        		<th>Currency OUT</th>
+                        		<th>Amount</th>
+                      		</tr>
+                      		<tr><br>
+                        		<td><input name = "incurrency" type="text" value="" ></td>
+                        		<td><input name = "outcurrency" type="text" value="" ></td>
+                        		<td><input name = "amount" type="text" value="" ></td>
+                        		<td><input name = "convert_button" type= "submit" value = "Please Convert"></td>
+                      		</tr>
+                  	</table>
+                </form>
+
+                <form action="galactic_exchange.cgi" method="get" id = "commodity_form">
+                	<table border = ".5">
+                    		<tr>
+                      			<th>Commodity</th>
+                    		</tr>
+				<tr><br>
+		    			<td><input name = "commodity" type ="text" value = "" > </td>
+                      			<td><input name = "lookup_button" type="submit" value="Lookup Please"></td>
+                  		</tr>
+			</table>
+                </form>
+        </body>
+</html>
+

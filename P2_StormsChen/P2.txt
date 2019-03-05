@@ -1,0 +1,58 @@
+CS 316
+Program 2
+by William Storms and Jia-Yi Chen
+March 4, 2019
+
+References:
+    1. https://stackoverflow.com/questions/3943772/how-do-i-shuffle-the-characters-in-a-string-in-javascript
+        - Used to figure out how to shuffle characters in JavaScript.
+    2. http://pietschsoft.com/post/2015/09/05/JavaScript-Basics-How-to-create-a-Dictionary-with-KeyValue-pairs
+        - Used to figure out how to create a dictionary in JavaScript.
+    3. https://stackoverflow.com/questions/4268085/the-current-element-as-its-event-function-param
+        - Used to figure out how to pass an element as event function parameter.
+    4. https://codehandbook.org/sorting-string-letters-in-alphabetical-order-using-javascript/
+        - Used to figure out how to sort string letters in alphabetical order.
+
+Collaboration:
+    1. None.
+
+Project URL:
+    1. https://www.cs.uky.edu/~wjst225/Anagram_Game.html
+
+Description:
+    The project is a game developed for an alien who is fascinated
+    with the concept of anagrams. The game is a mix of anagrams with crossword
+    puzzles in which a scramble of letters are given to the player and the
+    player must unscramble the letters to solved for words possible with the
+    anagram. A board hints the possible words that can be found by showing their
+    character lengths, and when the words are discovered, they are displayed in
+    those spaces in a crossword-like fashion. The game allows the player to
+    shuffle the letters, delete character selections, and start a new game with
+    a new anagram.
+
+Questions:
+    1. Why in the writeup did I say it doesn't really mean anything that this
+    project needs to run on the www.cs.uky.edu server?
+        - There is no file in need of being executed to display the webpage,
+        hence, the project does not need to be hosted on a server as the single
+        html file can be accessed directly from any web browser locally. For
+        instance, we developed our project and tested it locally.
+
+    2. Give a reason why I told you to pick a random name for your file. Think,
+    why THIS time when I am usually very strict about what you name files?
+        - It is easy to access the html code of a web page through a web
+        browser, therefore, it is crucial that the html file be difficult to
+        access by web browser so the web page cannot be easily reached.
+
+    3. If this were a real app to really challenge players, why is it silly to
+    write this in JavaScript with the data-structures I required?
+        - As said above, it is easy to access the html code through a web
+        browser, thus making it possible to "inspect" the page and find the
+        solutions to the puzzle in their respective data-structures.
+
+    4. Why can't we select a game from a form, send it to a CGI to output the
+    game and fix the problem in the previous question?
+        - The game requires dynamic feedback from the browser, which is
+        something that is not possible using a CGI file.
+
+

@@ -1,0 +1,56 @@
+CS 316
+Program 1
+by William Storms and Jia-Yi Chen
+February 11, 2019
+
+References:
+    1. https://docs.python.org/2/library/random.html
+        - Used to identify function needed to select random float number between
+        two values (commodities)
+
+Collaboration:
+    1. In-Class table
+        - To understand demands of the project assignment
+        - To understand cgi and html file integration
+
+Project URL:
+    1. http://www.cs.uky.edu/~wjst225/galactic_exchange.html
+
+Description:
+    The project consists of a intergalactic currency exchange program that is
+    able to convert one currency value to another given two specified currencies
+    from a list of both alien and human (or terran) currencies, and a specified
+    amount to be converted. The program also offers the ability to identify the
+    usdollar values of specific terran or alien commodities.
+
+Questions:
+    1. What does your CGI do if the value for exchange has the same currencies
+    for in and out?
+        - Our CGI maintains the value of the currency.
+
+    2. What is an example curl command to produce an answer? What answer did you
+    receive? Specifically, describe what you see from the output.
+        - An example curl command is
+        "curl https://www.cs.uky.edu/~wjst225/galactic_exchange.cgi?incurrency=usdollar&outcurrency=euro&amount=5&convert_button=Please+Convert"
+        and it displays the output of cgi given the form values from the url,
+        including all html code that is printed.
+
+    3. What happens if one of the field values submitted is a string of 100
+    characters? 1000 characters? 10000 characters?
+        - The default field length of each field is 20 characters, so any number
+        of characters beyond that cannot be submitted.
+
+    4. If you were given 50 new currency conversion factors for all the worlds
+    using the CGI, approximately how many lines of code would you need to add to
+    your program?
+        - 50 more lines would need to be added, since all conversion factors are
+        stored in a dictionary.
+
+    5. If you were given 100 new commodities, how many lines of code would need
+    to be added?
+        - 100 more lines would need to be added, since all commodity values
+        are stored in a dictionary.
+
+
+
+
