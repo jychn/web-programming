@@ -1,13 +1,41 @@
+var XelkReq = require('P3_Req.js');
+var http = require('http');
+var url = require('url')
+
 const whereToListen = 'belgarath.cs.uky.edu';
 const port = 3332;
-//^(\/)(LOCALFILE\/)(www)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.(html)(:[0-9]{1,5})?(\/.*)?$^(\/)
 
+function process_url(input){
+
+}
 function doprocess(request, response){
   var xurl = request.url;
   response.statusCode = 200;
   response.setHeader('Content-Type', 'text/plain');
   response.end('Hello, World! You requested the following URL: '+xurl+'\n');
   console.log("Hey, the client requested the URL: ("+xurl+")");
+  if (urlaccepted){
+    
+  }
+}
+function serveFile(){
+
+}
+
+function pullandsendFile(){
+
+}
+
+function pullandsendOutput(){
+
+}
+
+function generatePort(){
+  var lower = XelkReq.LowerPort()
+  var upper = XelkReq.UpperPort()
+
+  return Math.floor(Math.random() * (upper - lower)) + lower
+
 }
 
 var server = http.createServer(doprocess);
