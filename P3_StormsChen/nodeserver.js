@@ -1,5 +1,6 @@
 const whereToListen = 'belgarath.cs.uky.edu';
 const port = 3332;
+//^(\/)(LOCALFILE\/)(www)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.(html)(:[0-9]{1,5})?(\/.*)?$^(\/)
 
 function doprocess(request, response){
   var xurl = request.url;
