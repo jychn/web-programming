@@ -1,6 +1,17 @@
 var XelkReq = require('./P3_Req.js');
-var http = require('http');
-var url = require('url')
+var http = require('http'),
+    url = require('url');
+
+function getURL(request, response) {
+    var xurl = request.url;
+    response.statusCode = 200;
+    response.setHeader('Content-Type', 'text/plain');
+    response.end('Hello, World! You requested the following URL: '+xurl+'\n');
+    console.log("Hey, the client requested the URL: ("+xurl+")");
+    if (urlaccepted){
+
+    }
+}
 
 function process_url(input) {
     var fileExtensions = XelkReq.extAllowed(); //need to iterate over this to get first subelement of each element
@@ -20,7 +31,7 @@ function process_url(input) {
     // example of creating new regex and testing it with a string
     var regex1 = new RegExp(localFileString + filepathString + extAllowed);
     var string1a = "/LOCALFILE/myfile.html";
-    var string1b
+    var string1b = "/LOCALFILE/../../somefile.html";
     regex1.test(string1a); // this one is true
     regex1.test(string1b); // this one is false
 
@@ -29,16 +40,7 @@ function process_url(input) {
     //both of these ^ aren't totally correct
 
 }
-function getURL(request, response) {
-    var xurl = request.url;
-    response.statusCode = 200;
-    response.setHeader('Content-Type', 'text/plain');
-    response.end('Hello, World! You requested the following URL: '+xurl+'\n');
-    console.log("Hey, the client requested the URL: ("+xurl+")");
-    if (urlaccepted){
 
-    }
-}
 function serveFile() {
 
 }
