@@ -3,7 +3,6 @@ var http = require('http');
 var url = require('url')
 
 function process_url(input) {
-    var fileExtensions = XelkReq.extAllowed(); //need to iterate over this to get first subelement of each element
 
     // regex split up into parts
     var localFileString = "^(\/LOCALFILE\/)";
@@ -14,20 +13,33 @@ function process_url(input) {
     var hostString = "[a-zA-Z0-9\.]+";
     var cgipathString = "^[a-zA-Z0-9\/]+\.cgi$";
 
-    // temp extAllowed; can be removed
+    var extAllowed = "(";
+    XelkReq.extAllowed().forEach(function(item){
+      var temp = "(\\".concat(item[0]).concat(")|");
+      //console.log(temp);
+      extAllowed = extAllowed.concat(temp);
+
+    });
+    extAllowed = (extAllowed.substring(0, extAllowed.length - 1)).concat(")")
+
+    console.log(extAllowed);
+    //ask chen about the differences in what this creates vs the one below
     var extAllowed = "((\.html)|(\.mp3)|(\.jpg))";
+    console.log(extAllowed);
 
     // example of creating new regex and testing it with a string
     var regex1 = new RegExp(localFileString + filepathString + extAllowed);
     var string1a = "/LOCALFILE/myfile.html";
-    var string1b
-    regex1.test(string1a); // this one is true
-    regex1.test(string1b); // this one is false
+    var string1b = "/LOCALFILE/myfile/test.html";
+    var string1c = "";
+    console.log(regex1.test(string1a)); // this one is true
+    console.log(regex1.test(string1b)); // this one is true
+    console.log(regex1.test(string1c)); // this one is false
 
-    // var localFileRegExp = new RegExp(^(\/)(LOCALFILE\/)(www)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.(html)(:[0-9]{1,5})?(\/.*)?$^(\/)$)
-    // var remoteFileRegExp = new RegExp(^(\/)(REMOTEFILE\/)(www)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.(html)(:[0-9]{1,5})?(\/.*)?$^(\/)$)
-    //both of these ^ aren't totally correct
+    //now we should know if the command was valid and if so what type it is
 
+
+    // 1. return validity and type
 }
 function getURL(request, response) {
     var xurl = request.url;
@@ -35,8 +47,9 @@ function getURL(request, response) {
     response.setHeader('Content-Type', 'text/plain');
     response.end('Hello, World! You requested the following URL: '+xurl+'\n');
     console.log("Hey, the client requested the URL: ("+xurl+")");
+    //2. var = process_url(xurl)
     if (urlaccepted){
-
+      //3. do something
     }
 }
 function serveFile() {
@@ -58,16 +71,21 @@ function generatePort() {
     return Math.floor(Math.random() * (upper - lower)) + lower
 }
 
-var server = http.createServer(getURL);
+var server = http.createServer(getURL).listen(8080);
 
+//const whereToListen = 'belgarath.cs.uky.edu';
+//const port = 3332;
+/*
 try{
     server.on('error', (e) => {
         console.log("Error! " +e.code);
     }); // server.on()
-    port = generatePort();
-    whereToListen = "test";
+    //port = generatePort();
+    //whereToListen = "cs.uky.edu:";
     server.listen(port,whereToListen);
     console.log("Listening.....");
 } catch(error) {
     console.log("There was an error!" +error);
 }
+process_url("test")
+*/
