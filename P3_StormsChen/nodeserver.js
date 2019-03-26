@@ -11,7 +11,7 @@ function process_url(input) {
     var localExecString = "^(\/LOCALEXEC\/)";
     var remoteFileString = "^(\/REMOTEFILE\/)";
     var remoteExecString = "^(\/REMOTEEXEC\/)";
-    var filepathString = "([a-zA-Z0-9\/\~]*)+";
+    var filepathString = "[a-zA-Z0-9\/\~]+";
     var hostString = "[a-zA-Z0-9\.]+";
     var cgipathString = "^[a-zA-Z0-9\/]+\.cgi$";
 
@@ -32,7 +32,7 @@ function process_url(input) {
     var string2a = "/REMOTEFILE/myfile.html";
     console.log(regex2.test(string2a)); //
     */
-    var regex3 = new RegExp(localExecString + filepathString + extAllowed);
+    var regex3 = new RegExp(localExecString + cgipathString);
 
     var regex4 = new RegExp(remoteExecString + hostString + extAllowed);
     //now we should know if the command was valid and if so what type it is
