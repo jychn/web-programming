@@ -2,6 +2,7 @@ var XelkReq = require('./P3_Req.js');
 var http = require('http');
 var url = require('url');
 var fs = require('fs');
+var child_process = require('child_process');
 
 function process_url(input) {
 
@@ -126,6 +127,7 @@ function serveCGI(xurl) {
 
   //take the first character off until you hit the /
   var execpath = XelkReq.execDir().concat(truncated_url);
+  //child_process.exec()
 
 
 }
