@@ -1,6 +1,17 @@
 var XelkReq = require('./P3_Req.js');
-var http = require('http');
-var url = require('url')
+var http = require('http'),
+    url = require('url');
+
+function getURL(request, response) {
+    var xurl = request.url;
+    response.statusCode = 200;
+    response.setHeader('Content-Type', 'text/plain');
+    response.end('Hello, World! You requested the following URL: '+xurl+'\n');
+    console.log("Hey, the client requested the URL: ("+xurl+")");
+    if (urlaccepted){
+
+    }
+}
 
 function process_url(input) {
 
