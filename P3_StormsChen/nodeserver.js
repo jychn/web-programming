@@ -12,8 +12,8 @@ function process_url(input) {
     var remoteFileString = "^(\/REMOTEFILE\/)";
     var remoteExecString = "^(\/REMOTEEXEC\/)";
     var filepathString = "[a-zA-Z0-9\/\~]+";
-    var hostString = "[a-zA-Z0-9\.]+";
-    var cgipathString = "[a-zA-Z0-9\/]+\.cgi$";
+    var hostString = "([a-zA-Z0-9\.]+)";
+    var cgipathString = "[a-zA-Z0-9\/\~]+(\.cgi)$";
 
     var extAllowed = "(";
     XelkReq.extAllowed().forEach(function(item){
@@ -34,7 +34,7 @@ function process_url(input) {
     */
     var regex3 = new RegExp(localExecString + cgipathString);
 
-    var regex4 = new RegExp(remoteExecString + hostString + extAllowed);
+    var regex4 = new RegExp(remoteExecString + hostString + cgipathString);
     //now we should know if the command was valid and if so what type it is
     var type = 0;
     if (regex1.test(input) == true){
@@ -58,30 +58,26 @@ function process_url(input) {
 function getURL(request, response) {
     var xurl = request.url;
     response.statusCode = 200;
-    response.setHeader('Content-Type', 'text/plain');
-    response.write('You requested the following URL: '+xurl+'\n');
+    // response.setHeader('Content-Type', 'text/plain');
+    // response.write('You requested the following URL: '+xurl+'\n');
     console.log("Hey, the client requested the URL: ("+xurl+")");
 
     var type = process_url(xurl);
     if (type != 0){
       response.write("It has been ACCEPTED\n");
-      response.end();
+      //response.end();
     }else{
       response.write("It has been REJECTED\n");
       response.end();
     }
     if (type == 1){
       //serve file
-      console.log("hit")
       serveFile(xurl, response);
-
-
-      //response.write(text);
 
     }
     if (type == 2){
       //serve remote file
-
+      pullAndsendFile(xurl, response);
 
     }
     if (type == 3){
@@ -90,6 +86,7 @@ function getURL(request, response) {
     }
     if (type == 4){
       //exec remote file
+      pullandsendOutput(xurl, response);
     }
     //response.end();
 
@@ -124,6 +121,7 @@ function serveCGI(xurl, response) {
   /* your server shall use the exec() functionto run the requested .cgi file locally.
     You shall usethe XelkReq.execdir() + the URL requested.
   */
+  // response.setHeader('Content-Type', 'text/html');
   var curr_char = ""
   idx = 1;
   while (curr_char != '/'){
@@ -137,32 +135,77 @@ function serveCGI(xurl, response) {
   console.log(execpath);
   child_process.exec(execpath, function (error, stdout, stderr) {
     if (error) {
+      //response.end("There was an error executing this CGI.");
+      console.log(stderr);
+    } else {
+      var text = stdout;
+
+      response.end(stdout)
+    }
+    // the response ending
+  });
+}
+
+function pullAndsendFile(xurl, response) {
+  /* your server shall take therequested URL and use exec() to call "curl"+URL.
+  */
+  var curr_char = ""
+  idx = 1;
+  while (curr_char != '/'){
+    curr_char = xurl[idx];
+    idx ++;
+  }
+  var truncated_url = xurl.substring(idx, xurl.length);
+
+  //take the first character off until you hit the /
+  var execpath = truncated_url;
+  console.log(execpath);
+  child_process.exec("curl -s -S " + execpath, function (error, stdout, stderr) { //CHANGE CURL TO USR/BIN/CURL
+    if (error) {
       response.end("There was an error executing this CGI.");
       console.log(stderr);
     } else {
       var text = stdout;
-      console.log("STDOUT", stdout);
-      response.end(text);
 
+      response.end(stdout)
     }
-
+    // the response ending
   });
-}
 
-function pullAndsendFile() {
-  /* your server shall take therequested URL and use exec() to call "curl"+URL.
-  */
 
 }
 
-function pullandsendOutput(){
+function pullandsendOutput(xurl, response){
   /* your server shall take the requested URL and use exec() to call "curl"+URL forREMOTEEXEC.
   Note, that pullandsendFile() andpullandsendOutput() are virtually identical.
   Also note that serveCGI *also* uses exec().
   You shouldnot duplicate code.
-  Hint:  you could write afunction to exec() something passed in as a parameter.
+  Hint:  you could write a function to exec() something passed in as a parameter.
   That parameter could be either the CGI or either"curl" commands.....
   */
+  var curr_char = ""
+  idx = 1;
+  while (curr_char != '/'){
+    curr_char = xurl[idx];
+    idx ++;
+  }
+  var truncated_url = xurl.substring(idx, xurl.length);
+
+  //take the first character off until you hit the /
+  var execpath = truncated_url;
+  console.log(execpath);
+  child_process.exec("curl -s -S " + execpath, function (error, stdout, stderr) { //CHANGE CURL TO USR/BIN/CURL
+    if (error) {
+      response.end("There was an error executing this CGI.");
+      console.log(stderr);
+    } else {
+      var text = stdout;
+
+      response.end(stdout)
+    }
+    // the response ending
+  });
+
 
 }
 
