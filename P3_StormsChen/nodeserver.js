@@ -75,7 +75,7 @@ function truncateURL(inputURL) {
         currChar = inputURL[i];
         i++;
     }
-    var newUrl = xurl.substring(i, xurl.length); // Truncate url
+    var newUrl = inputURL.substring(i, inputURL.length); // Truncate url
 
     return newURL;
 }
