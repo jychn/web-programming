@@ -8,7 +8,7 @@
 var XelkReq = require('/homes/paul/HTML/CS316/P3_Req.js');
 var http = require('http');
 var url = require('url');
-var fs = require('fs').readFile;
+var readFile = require('fs').readFile;
 var exec = require('child_process').exec;
 
 
