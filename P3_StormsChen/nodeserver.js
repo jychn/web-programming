@@ -119,7 +119,7 @@ function truncateURL(inputURL) {
 }
 
 
-function executePath(inputPath) {
+function executePath(inputPath, response) {
 /* Function executes given path and writes corresponding output to server and
    client in both success and error. */
 
@@ -191,7 +191,7 @@ function serveCGI(xurl, response) {
     console.log(execpath);
 
     // Execute path
-    executePath(execpath);
+    executePath(execpath, response);
 }
 
 
@@ -207,7 +207,7 @@ function pullandsendFile(xurl, response) {
     console.log(execpath);
 
     // Execute path
-    executePath(execpath);
+    executePath(execpath, response);
 }
 
 
@@ -223,7 +223,7 @@ function pullandsendOutput(xurl, response) {
     console.log(execpath);
 
     // Execute path
-    executePath(executePath);
+    executePath(executePath, response);
 }
 
 
