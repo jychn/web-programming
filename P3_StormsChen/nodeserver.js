@@ -51,7 +51,6 @@ function getURL(request, response) {
     else if (type == 4) { // Executing remote CGI file
         pullandsendOutput(xurl, response);
     }
-    response.end();
 }
 
 
