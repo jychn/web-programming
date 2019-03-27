@@ -139,6 +139,7 @@ function executePath(inputPath, response) {
         });
     }
     else {
+        response.statusCode = 403;
         console.log("The URL is valid but the requested file does not exist.");
         response.write("Your URL is valid but the file does not exist.\n")
         response.end();
@@ -172,6 +173,7 @@ function serveFile(xurl, response) {
         });
     }
     else {
+        response.statusCode = 403;
         console.log("The URL is valid but the requested file does not exist.");
         response.write("Your URL is valid but the file does not exist.\n")
         response.end();
