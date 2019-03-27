@@ -5,7 +5,7 @@ var fs = require('fs');
 var child_process = require('child_process');
 //testing git merge stuff
 function process_url(input) {
-    
+
     // regex split up into parts
     var localFileString = "^(\/LOCALFILE\/)";
     var localExecString = "^(\/LOCALEXEC\/)";
@@ -13,7 +13,7 @@ function process_url(input) {
     var remoteExecString = "^(\/REMOTEEXEC\/)";
     var filepathString = "[a-zA-Z0-9\/\~]+";
     var hostString = "[a-zA-Z0-9\.]+";
-    var cgipathString = "^[a-zA-Z0-9\/]+\.cgi$";
+    var cgipathString = "[a-zA-Z0-9\/]+\.cgi$";
 
     var extAllowed = "(";
     XelkReq.extAllowed().forEach(function(item){
@@ -39,10 +39,11 @@ function process_url(input) {
     var type = 0;
     if (regex1.test(input) == true){
       type = 1;
-      console.log()
+
     }
     else if(regex2.test(input) == true){
       type = 2;
+
     }
     else if(regex3.test(input) == true){
       type = 3;
@@ -69,19 +70,23 @@ function getURL(request, response) {
     }
     if (type == 1){
       //serve file
-      serveFile(xurl);
+      var text = serveFile(xurl);
+      console.log(text);
+      //response.write(text);
+
     }
     if (type == 2){
-      //serve file
-      serveFile(xurl)
+      //serve remote file
+
+
     }
     if (type == 3){
+      serveCGI(xurl)
       //execfile
     }
     if (type == 4){
-      //execfile
+      //exec remote file
     }
-
     response.end();
 
 }
@@ -100,17 +105,18 @@ function serveFile(xurl) {
   //take the first character off until you hit the /
   var filepath = XelkReq.fileDir().concat(truncated_url);
   console.log(filepath);
-  fs.readFile(filepath, function read(err, data) {
+  var text;
+  fs.readFile(filepath, "utf8", function read(err, data) {
     if (err) {
         throw err;
     }
-    var content = data;
+    console.log(data.toString());
 
-    // Invoke the next step here however you like
-    console.log(content);   // Put all of the code here (not the best solution)
-    //processFile();          // Or put the next step in a function and invoke it
+
+
     });
 
+  return text;
 }
 
 function serveCGI(xurl) {
@@ -127,8 +133,8 @@ function serveCGI(xurl) {
 
   //take the first character off until you hit the /
   var execpath = XelkReq.execDir().concat(truncated_url);
-  //child_process.exec()
-
+  child_process.exec(execpath);
+  console.log("GOT HERE");
 
 }
 
