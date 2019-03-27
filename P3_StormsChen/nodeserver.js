@@ -12,9 +12,9 @@ var fs = require('fs').readFile;
 var exec = require('child_process').exec;
 
 
-// Defines the hostname
+// Defines the hostname and generated port
 const hostname = 'iris.cs.uky.edu';
-const port = generatePort(); // Use Randomport
+const port = 8080; //generatePort();
 
 
 function processUrl(inputURL) {
