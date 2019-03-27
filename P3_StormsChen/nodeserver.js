@@ -114,7 +114,7 @@ function getURL(request, response) {
     // Check if URL is valid and output corresponding response to server and client
     if (type == 0) {
         status = "REJECTED";
-        response.write("Your URL is invalid and not accepted: " + xurl "\n");
+        response.write("Your URL is invalid and not accepted: " + xurl + "\n");
         response.end();
     }
     else {
