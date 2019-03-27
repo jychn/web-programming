@@ -68,7 +68,7 @@ function processURL(inputURL) {
     });
     extAllowed = (extAllowed.substring(0, extAllowed.length - 1)).concat(")$");
     var filepathString = "[a-zA-Z0-9\/\~]+" + extAllowed;
-    var hostString = "[a-zA-Z0-9\.]+";
+    var hostString = "[a-zA-Z0-9\.]+\/";
     var cgipathString = "[a-zA-Z0-9\/\~]+\.cgi$";
 
     var localFileString = "^(\/LOCALFILE\/)" + filepathString;
