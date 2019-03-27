@@ -107,19 +107,18 @@ function getURL(request, response) {
 
     var xurl = request.url;
     response.statusCode = 200;
-    // response.setHeader('Content-Type', 'text/plain');
-    // response.write('You requested the following URL: '+xurl+'\n');
     console.log("Hey, the client requested the URL: (" + xurl + ")");
     var type = processUrl(xurl);
+    var status;
 
     // Check if URL is valid and output corresponding response to server and client
     if (type == 0) {
-        console.log("REJECTED");
-        response.write("Your URL is invalid and not accepted: " + xurl);
+        status = "REJECTED";
+        response.write("Your URL is invalid and not accepted: " + xurl "\n");
         response.end();
     }
     else {
-        console.log("ACCEPTED");
+        status = "ACCEPTED";
         if (type == 1) { // Accessing local file
             serveFile(xurl, response);
         }
@@ -134,6 +133,7 @@ function getURL(request, response) {
         }
         response.end();
     }
+    console.log(" Hey, the client requested the URL: (" + xurl + ") " + status)
 }
 
 
