@@ -17,6 +17,44 @@ const hostname = 'iris.cs.uky.edu';
 const port = 8080; //generatePort();
 
 
+function getURL(request, response) {
+/* Function that obtains client input and responds according to whether request
+   has been accepted or rejected. If accepted, accesses or executes requested
+   file. Rejects if file does not exist. */
+
+    var xurl = request.url;
+    response.statusCode = 200;
+    var type = processURL(xurl);
+    var status;
+
+    // Check if URL is valid and set corresponding response
+    if (type == 0) {
+        status = "REJECTED";
+        response.write("Your URL is invalid and not accepted: " + xurl + "\n");
+        response.end();
+    }
+    else {
+        status = "ACCEPTED";
+    }
+    console.log("Hey, the client requested the URL: (" + xurl + ") " + status);
+
+    // If not rejected, deploy function corresponding to type of URL request
+    if (type == 1) { // Accessing local file
+        serveFile(xurl, response);
+    }
+    else if (type == 2) { // Executing local CGI file
+        serveCGI(xurl, response);
+    }
+    else if (type == 3) { // Accessing remote file
+        pullandsendFile(xurl, response);
+    }
+    else if (type == 4) { // Executing remote CGI file
+        pullandsendOutput(xurl, response);
+    }
+    response.end();
+}
+
+
 function processURL(inputURL) {
 /* Function that takes in URL input and ensures it is a valid HTTP requests by
    checking the format with regular expressions using .test() method. */
@@ -101,49 +139,10 @@ function executePath(inputPath) {
         });
     }
     else {
-        response.statusCode = 404;
         console.log("The URL is valid but the requested file does not exist.");
         response.write("Your URL is valid but the file does not exist.\n")
         response.end();
     }
-}
-
-
-function getURL(request, response) {
-/* Function that obtains client input and responds according to whether request
-   has been accepted or rejected. If accepted, accesses or executes requested
-   file. Rejects if file does not exist. */
-
-    var xurl = request.url;
-    response.statusCode = 200;
-    var type = processURL(xurl);
-    var status;
-
-    // Check if URL is valid and set corresponding response
-    if (type == 0) {
-        status = "REJECTED";
-        response.write("Your URL is invalid and not accepted: " + xurl + "\n");
-        response.end();
-    }
-    else {
-        status = "ACCEPTED";
-    }
-    console.log("Hey, the client requested the URL: (" + xurl + ") " + status);
-
-    // If not rejected, deploy function corresponding to type of URL request
-    if (type == 1) { // Accessing local file
-        serveFile(xurl, response);
-    }
-    else if (type == 2) { // Executing local CGI file
-        serveCGI(xurl, response);
-    }
-    else if (type == 3) { // Accessing remote file
-        pullandsendFile(xurl, response);
-    }
-    else if (type == 4) { // Executing remote CGI file
-        pullandsendOutput(xurl, response);
-    }
-    response.end();
 }
 
 
@@ -173,7 +172,6 @@ function serveFile(xurl, response) {
         });
     }
     else {
-        response.statusCode = 404;
         console.log("The URL is valid but the requested file does not exist.");
         response.write("Your URL is valid but the file does not exist.\n")
         response.end();
