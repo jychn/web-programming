@@ -190,7 +190,6 @@ function serveCGI(xurl, response) {
 
     // Create file path
     var execpath = XelkReq.execDir().concat(truncatedURL);
-    console.log(execpath);
 
     // Execute path
     executePath(execpath, response);
@@ -206,7 +205,6 @@ function pullandsendFile(xurl, response) {
 
     // Create curl command using client URL
     var execpath = "/usr/bin/curl -s -S " + truncatedURL;
-    console.log(execpath);
 
     // Execute path
     executePath(execpath, response);
@@ -222,7 +220,6 @@ function pullandsendOutput(xurl, response) {
 
     // Create curl command using client URL
     var execpath = "usr/bin/curl -s -S " + truncatedURL;
-    console.log(execpath);
 
     // Execute path
     executePath(executePath, response);
