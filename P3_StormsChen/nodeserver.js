@@ -110,7 +110,7 @@ function getURL(request, response) {
     var type = processURL(xurl);
     var status;
 
-    // Check if URL is valid and output corresponding response to server and client
+    // Check if URL is valid and set corresponding response
     if (type == 0) {
         status = "REJECTED";
         response.write("Your URL is invalid and not accepted: " + xurl + "\n");
@@ -118,21 +118,23 @@ function getURL(request, response) {
     }
     else {
         status = "ACCEPTED";
-        if (type == 1) { // Accessing local file
-            serveFile(xurl, response);
-        }
-        else if (type == 2) { // Executing local CGI file
-            serveCGI(xurl, response);
-        }
-        else if (type == 3) { // Accessing remote file
-            pullandsendFile(xurl, response);
-        }
-        else if (type == 4) { // Executing remote CGI file
-            pullandsendOutput(xurl, response);
-        }
-        response.end();
     }
-    console.log("Hey, the client requested the URL: (" + xurl + ") " + status)
+    console.log("Hey, the client requested the URL: (" + xurl + ") " + status);
+
+    // If not rejected, deploy function corresponding to type of URL request
+    if (type == 1) { // Accessing local file
+        serveFile(xurl, response);
+    }
+    else if (type == 2) { // Executing local CGI file
+        serveCGI(xurl, response);
+    }
+    else if (type == 3) { // Accessing remote file
+        pullandsendFile(xurl, response);
+    }
+    else if (type == 4) { // Executing remote CGI file
+        pullandsendOutput(xurl, response);
+    }
+    response.end();
 }
 
 
@@ -165,7 +167,7 @@ function serveFile(xurl, response) {
     else {
         response.statusCode = 404;
         console.log("The requested file does not exists.");
-        response.write("Your URL is valid but the file does not exist.")
+        response.write("Your URL is valid but the file does not exist.\n")
         response.end();
     }
 }
