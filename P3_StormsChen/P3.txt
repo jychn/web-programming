@@ -1,0 +1,50 @@
+CS 316
+Program 3
+by William Storms and Jia-Yi Chen
+March 26, 2019
+
+References:
+    1.
+
+Collaboration:
+    1. None.
+
+Project URL:
+    1.
+
+Description:
+    The project is a proxy web server, named Xeloxy, developed for an alien that
+    is unable to access Earth-based websites due to Earth's firewall
+    restrictions. The server acts as an intermediary allowing a user to access
+    different files via the CURL command, including both local server files and
+    remote server files when given a hostname/URL. It is able to access HTML,
+    MP3, and JPEG files, and it is also able to execute both local and remote
+    CGI programs, returning the output to the user.
+
+Questions:
+    1. What happens if your random number generator picks a port number that a
+    student already has allocated? Be specific, maybe even include an error
+    message....
+        - Due to TCP, the server would be unable to listen on the randomly
+        generated port since it is already in use. {insert specific example}
+
+    2. What happens if your random number generator is incorrect and returns a
+    number below 1024?  Again, be specific.
+        - {Ports below 1024 are reserved for system admin processes, but test
+        this on the CS server to get a more specific answer.}
+
+    3. Why, in a real world deployment with multiple, unknown users, would it be
+    not very useful to use a random port for your server?
+        - It is unknown whether other processes or users have already allocated
+        the randomly generated port, thus creating the possibility of the
+        server being unsuccessful since the port is already in use.
+
+    4. When I add [".foo", "test/foo"] to the extAllowed array, what (if any)
+    lines of code do you need to modify/add in your program?
+        - No lines of code need to be added since the extAllowed array is
+        called on by forEach() which acts on each element of the array (with an
+        anonymous function) regardless of the number of elements.
+
+
+
+
