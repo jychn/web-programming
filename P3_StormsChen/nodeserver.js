@@ -107,7 +107,6 @@ function getURL(request, response) {
 
     var xurl = request.url;
     response.statusCode = 200;
-    console.log("Hey, the client requested the URL: (" + xurl + ")");
     var type = processUrl(xurl);
     var status;
 
@@ -133,7 +132,7 @@ function getURL(request, response) {
         }
         response.end();
     }
-    console.log(" Hey, the client requested the URL: (" + xurl + ") " + status)
+    console.log("Hey, the client requested the URL: (" + xurl + ") " + status)
 }
 
 
@@ -142,7 +141,7 @@ function serveFile(xurl, response) {
    readFile() to access the file. */
 
     // Truncate URL
-    var truncatedUrl = "\/" + truncatedUrl(xurl);
+    var truncatedUrl = "\/" + truncateUrl(xurl);
 
     // Creating file path
     var filepath = XelkReq.fileDir().concat(truncatedUrl);
