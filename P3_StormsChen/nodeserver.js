@@ -65,13 +65,17 @@ function getURL(request, response) {
     var type = process_url(xurl);
     if (type != 0){
       response.write("It has been ACCEPTED\n");
+      response.end();
     }else{
       response.write("It has been REJECTED\n");
+      response.end();
     }
     if (type == 1){
       //serve file
-      var text = serveFile(xurl);
-      console.log(text);
+      console.log("hit")
+      serveFile(xurl, response);
+
+
       //response.write(text);
 
     }
@@ -81,45 +85,42 @@ function getURL(request, response) {
 
     }
     if (type == 3){
-      serveCGI(xurl)
+      serveCGI(xurl, response);
       //execfile
     }
     if (type == 4){
       //exec remote file
     }
-    response.end();
+    //response.end();
 
 }
-function serveFile(xurl) {
+function serveFile(xurl, response) {
   /* your server shall create a file path from XelkReq.fileDir() + the URL requested.
       This function must use the readFile() function for thispart.
   */
   var curr_char = ""
-  idx = 1;
+  idx = 1; //start at first 'slash'
   while (curr_char != '/'){
     curr_char = xurl[idx];
     idx ++;
   }
-  var truncated_url = xurl.substring(idx - 1,xurl.length);
+  var truncated_url = xurl.substring(idx - 1,xurl.length); //truncate url
 
   //take the first character off until you hit the /
   var filepath = XelkReq.fileDir().concat(truncated_url);
   console.log(filepath);
   var text;
-  fs.readFile(filepath, "utf8", function read(err, data) {
+  var exp = ""
+  fs.readFile(filepath, function read(err, data) {
     if (err) {
         throw err;
     }
-    console.log(data.toString());
-
-
-
+    response.write(data);
+    response.end();
     });
-
-  return text;
 }
 
-function serveCGI(xurl) {
+function serveCGI(xurl, response) {
   /* your server shall use the exec() functionto run the requested .cgi file locally.
     You shall usethe XelkReq.execdir() + the URL requested.
   */
@@ -133,9 +134,19 @@ function serveCGI(xurl) {
 
   //take the first character off until you hit the /
   var execpath = XelkReq.execDir().concat(truncated_url);
-  child_process.exec(execpath);
-  console.log("GOT HERE");
+  console.log(execpath);
+  child_process.exec(execpath, function (error, stdout, stderr) {
+    if (error) {
+      response.end("There was an error executing this CGI.");
+      console.log(stderr);
+    } else {
+      var text = stdout;
+      console.log("STDOUT", stdout);
+      response.end(text);
 
+    }
+
+  });
 }
 
 function pullAndsendFile() {
