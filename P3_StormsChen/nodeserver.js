@@ -141,7 +141,7 @@ function serveFile(xurl, response) {
    readFile() to access the file. */
 
     // Truncate URL
-    var truncatedUrl = "\/" + truncateUrl(xurl);
+    var truncatedUrl = "\/" + truncateURL(xurl);
 
     // Creating file path
     var filepath = XelkReq.fileDir().concat(truncatedUrl);
