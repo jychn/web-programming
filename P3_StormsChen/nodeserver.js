@@ -8,7 +8,7 @@
 var XelkReq = require('/homes/paul/HTML/CS316/P3_Req.js');
 var http = require('http');
 var url = require('url');
-var readFile = require('fs').readFile;
+var fs = require('fs');
 var exec = require('child_process').exec;
 
 
@@ -17,7 +17,7 @@ const hostname = 'iris.cs.uky.edu';
 const port = 8080; //generatePort();
 
 
-function processUrl(inputURL) {
+function processURL(inputURL) {
 /* Function that takes in URL input and ensures it is a valid HTTP requests by
    checking the format with regular expressions using .test() method. */
 
@@ -107,7 +107,7 @@ function getURL(request, response) {
 
     var xurl = request.url;
     response.statusCode = 200;
-    var type = processUrl(xurl);
+    var type = processURL(xurl);
     var status;
 
     // Check if URL is valid and output corresponding response to server and client
@@ -141,24 +141,33 @@ function serveFile(xurl, response) {
    readFile() to access the file. */
 
     // Truncate URL
-    var truncatedUrl = "\/" + truncateURL(xurl);
+    var truncatedURL = "\/" + truncateURL(xurl);
 
     // Creating file path
-    var filepath = XelkReq.fileDir().concat(truncatedUrl);
+    var filepath = XelkReq.fileDir().concat(truncatedURL);
     console.log(filepath);
 
-    // Read file using callback function and writing output to client
-    readFile(filepath, function read(err, data) {
-        if (err) {
-            response.statusCode = 403;
-            console.log("READ error: " + err);
-            response.write("Error reading file: " + err);
-        }
-        else {
-            response.write(data);
-        }
+    // Check to see if file exists
+    if (fs.existsSync(filepath)) {
+        // Read file using callback function and writing output to client
+        fs.readFile(filepath, function read(err, data) {
+            if (err) {
+                response.statusCode = 403;
+                console.log("READ error: " + err);
+                response.write("Error reading file: " + err);
+            }
+            else {
+                response.write(data);
+            }
+            response.end();
+        });
+    }
+    else {
+        response.statusCode = 404;
+        console.log("The requested file does not exists.");
+        response.write("Your URL is valid but the file does not exist.")
         response.end();
-    });
+    }
 }
 
 
@@ -170,7 +179,7 @@ function serveCGI(xurl, response) {
     var truncatedURL = "\/" + truncateURL(xurl);
 
     // Create file path
-    var execpath = XelkReq.execDir().concat(truncatedUrl);
+    var execpath = XelkReq.execDir().concat(truncatedURL);
     console.log(execpath);
 
     // Execute path
@@ -186,7 +195,7 @@ function pullandsendFile(xurl, response) {
     var truncatedURL = truncateURL(xurl);
 
     // Create curl command using client URL
-    var execpath = "/usr/bin/curl -s -S " + truncatedUrl;
+    var execpath = "/usr/bin/curl -s -S " + truncatedURL;
     console.log(execpath);
 
     // Execute path
