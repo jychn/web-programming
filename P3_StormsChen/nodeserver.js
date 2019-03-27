@@ -128,7 +128,7 @@ function executePath(inputPath, response) {
         exec(inputPath, function (err, stdout, stderr) {
             if (err) {
                 response.statusCode = 403;
-                console.log("EXEC error: " + err);
+                console.log("Error executing file: " + err);
                 response.write("Error executing file: " + stderr);
             }
             else {
@@ -162,7 +162,7 @@ function serveFile(xurl, response) {
         fs.readFile(filepath, function read(err, data) {
             if (err) {
                 response.statusCode = 403;
-                console.log("READ error: " + err);
+                console.log("Error reading file: " + err);
                 response.write("Error reading file: " + err);
             }
             else {
