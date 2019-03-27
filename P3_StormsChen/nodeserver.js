@@ -110,7 +110,7 @@ function getURL(request, response) {
     // response.setHeader('Content-Type', 'text/plain');
     // response.write('You requested the following URL: '+xurl+'\n');
     console.log("Hey, the client requested the URL: (" + xurl + ")");
-    var type = process_url(xurl);
+    var type = processUrl(xurl);
 
     // Check if URL is valid and output corresponding response to server and client
     if (type == 0) {
