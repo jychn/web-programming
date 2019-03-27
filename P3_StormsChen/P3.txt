@@ -4,13 +4,14 @@ by William Storms and Jia-Yi Chen
 March 26, 2019
 
 References:
-    1.
+    1. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+    2. https://www.w3schools.com/jsref/jsref_substring.asp
 
 Collaboration:
-    1. None.
+    1. None
 
 Project URL:
-    1.
+    1. Not applicable
 
 Description:
     The project is a proxy web server, named Xeloxy, developed for an alien that
@@ -44,7 +45,3 @@ Questions:
         - No lines of code need to be added since the extAllowed array is
         called on by forEach() which acts on each element of the array (with an
         anonymous function) regardless of the number of elements.
-
-
-
-
