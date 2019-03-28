@@ -14,8 +14,8 @@ var os = require('os');
 
 
 // Defines the hostname and generated port
-var port = generatePort();
-var hostname = 'iris.cs.uky.edu';
+const port = 8080; //generatePort();
+const hostname = 'iris.cs.uky.edu';
 
 
 function getURL(request, response) {
