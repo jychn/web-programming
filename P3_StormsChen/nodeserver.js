@@ -218,7 +218,7 @@ function pullandsendOutput(xurl, response) {
     var truncatedURL = truncateURL(xurl);
 
     // Create curl command using client URL
-    var execpath = "usr/bin/curl -s -S " + truncatedURL;
+    var execpath = "/usr/bin/curl -s -S " + truncatedURL;
 
     // Execute path
     executePath(execpath, response);
