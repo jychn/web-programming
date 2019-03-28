@@ -238,11 +238,11 @@ function generatePort() {
 // Creates a server to listen given a port and hostname, and uses a callback
 // function to output success or error.
 var server = http.createServer(getURL);
-server.listen(port, hostname, function(err) {
+server.listen(port, function(err) {
     if (err) {
         console.log("Error starting server: " + err);
     }
     else {
-        console.log("Server started. Listening on http://" + hostname + ":" + port);
+        console.log("Server started. Listening on http://" /*+ hostname*/ + ":" + port);
     }
 });
