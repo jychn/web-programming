@@ -15,7 +15,7 @@ var os = require('os');
 
 // Defines the hostname and generated port
 var port = generatePort();
-var hostname = os.hostname();
+var hostname = 'iris.cs.uky.edu';
 
 
 function getURL(request, response) {
@@ -239,7 +239,7 @@ function generatePort() {
 // Creates a server to listen given a port and hostname, and uses a callback
 // function to output success or error.
 var server = http.createServer(getURL);
-server.listen(port, function(err) {
+server.listen(port, hostname, function(err) {
     if (err) {
         console.log("Error starting server: " + err);
     }
