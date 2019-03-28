@@ -123,7 +123,7 @@ function executePath(inputPath, response) {
 /* Function executes given path and writes corresponding output to server and
    client in both success and error. */
 
-    // Execute file using callback function and sending output to client
+    // Execute file using callback function and output to server and client
     exec(inputPath, function (err, stdout, stderr) {
         if (err) {
             response.statusCode = 403;
