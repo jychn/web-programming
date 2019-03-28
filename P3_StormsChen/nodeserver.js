@@ -10,11 +10,10 @@ var http = require('http');
 var url = require('url');
 var fs = require('fs');
 var exec = require('child_process').exec;
-var os = require('os');
 
 
 // Defines the hostname and generated port
-const port = 8080; //generatePort();
+const port = 800; //generatePort();
 const hostname = 'iris.cs.uky.edu';
 
 
