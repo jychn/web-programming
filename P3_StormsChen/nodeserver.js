@@ -124,6 +124,7 @@ function executePath(inputPath, response) {
    client in both success and error. */
 
     // Check to see if file exists
+    console.log(inputPath);
     if (fs.existsSync(inputPath)) {
         // Execute file using callback function and sending output to client
         exec(inputPath, function (err, stdout, stderr) {
