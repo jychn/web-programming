@@ -221,7 +221,7 @@ function pullandsendOutput(xurl, response) {
     var execpath = "usr/bin/curl -s -S " + truncatedURL;
 
     // Execute path
-    executePath(executePath, response);
+    executePath(execpath, response);
 }
 
 
