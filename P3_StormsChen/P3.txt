@@ -1,17 +1,22 @@
 CS 316
 Program 3
 by William Storms and Jia-Yi Chen
-March 26, 2019
+March 27, 2019
 
 References:
-    1. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-    2. https://www.w3schools.com/jsref/jsref_substring.asp
+    1. https://nodejs.org/docs/v8.10.0/api/
+        - Used to figure out how to use node.js modules
+    2. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+        - Used to figure out how to use random.
+    3. https://www.w3schools.com/jsref/jsref_substring.asp
+        - Used to figure out how to use substrings in JavaScript.
 
 Collaboration:
-    1. None
+    1. None.
 
 Project URL:
-    1. Not applicable
+    1. Not applicable, but wanted to note server is set to run on the
+    iris.cs.uky.edu UK server.
 
 Description:
     The project is a proxy web server, named Xeloxy, developed for an alien that
@@ -26,22 +31,71 @@ Questions:
     1. What happens if your random number generator picks a port number that a
     student already has allocated? Be specific, maybe even include an error
     message....
-        - Due to TCP, the server would be unable to listen on the randomly
-        generated port since it is already in use. {insert specific example}
+        - Due to TCP, the server would be unable to listen on the generated port
+        since it is already in use. The error it would generate is as follows:
+
+           "events.js:183
+                throw er; // Unhandled 'error' event
+                ^
+
+            Error: listen EADDRINUSE 128.163.146.98:8080
+                at Object._errnoException (util.js:1022:11)
+                at _exceptionWithHostPort (util.js:1044:20)
+                at Server.setupListenHandle [as _listen2] (net.js:1367:14)
+                at listenInCluster (net.js:1408:12)
+                at GetAddrInfoReqWrap.doListen [as callback] (net.js:1517:7)
+                at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:97:10)"
 
     2. What happens if your random number generator is incorrect and returns a
     number below 1024?  Again, be specific.
-        - {Ports below 1024 are reserved for system admin processes, but test
-        this on the CS server to get a more specific answer.}
+        - Similar to last question, the server would be unable to listen on the
+        generated port since it would already be in used as ports below 1024 are
+        reserved for system admin processes. The error it would generate is as
+        follows:
+
+           "events.js:183
+                throw er; // Unhandled 'error' event
+                ^
+
+            Error: listen EACCES 128.163.146.98:800
+                at Object._errnoException (util.js:1022:11)
+                at _exceptionWithHostPort (util.js:1044:20)
+                at Server.setupListenHandle [as _listen2] (net.js:1350:19)
+                at listenInCluster (net.js:1408:12)
+                at GetAddrInfoReqWrap.doListen [as callback] (net.js:1517:7)
+                at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:97:10)"
 
     3. Why, in a real world deployment with multiple, unknown users, would it be
     not very useful to use a random port for your server?
-        - It is unknown whether other processes or users have already allocated
-        the randomly generated port, thus creating the possibility of the
-        server being unsuccessful since the port is already in use.
+        - It is unknown what ports are in use or whether other processes or
+        users have already allocated a randomly generated port, thus creating
+        the possibility of the server being unsuccessfully ran since the port is
+        already in use.
 
     4. When I add [".foo", "test/foo"] to the extAllowed array, what (if any)
     lines of code do you need to modify/add in your program?
         - No lines of code need to be added since the extAllowed array is
         called on by forEach() which acts on each element of the array (with an
         anonymous function) regardless of the number of elements.
+
+    5. What would happen if two users try to access your server at the same time
+    in the following scenario:
+    1) user #1 asks for the URL (which you can assume is valid):
+    http://yourserver:port/REMOTEEXEC/fooserver.com/sleep100.cgi
+
+    where the program sleep100.cgi sleeps for 100 seconds and then outputs
+    "<YAWN>" to the client.
+
+    2) user #2 asks for the URL (which is assumed valid):
+    http://yourserver:port/REMOTEEXEC/fooserver2.com/hw.cgi
+
+    where program hw.cgi outputs "Hello, World" to the client.
+
+    What is the perceived runtime for #1 and #2 (within 5 seconds) and why?
+        - Within 5 seconds, user #1 would receive no input and user #2 would
+        receive "Hello, World" immediately. This is because the server responds
+        to CGI execution requests separately as exec() executes asynchronously
+        due to the use of a callback function. In other words, both requests
+        will be responded to immediately but if user #1's request reaches the
+        server first, the delay from executing sleep100.cgi will not affect
+        user #2's request.

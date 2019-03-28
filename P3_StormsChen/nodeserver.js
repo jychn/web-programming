@@ -12,7 +12,7 @@ var fs = require('fs');
 var exec = require('child_process').exec;
 
 
-// Defines the hostname and generated port
+// Defines the generated port and hostname
 const port = generatePort();
 const hostname = 'iris.cs.uky.edu';
 
