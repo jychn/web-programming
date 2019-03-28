@@ -240,7 +240,7 @@ function generatePort() {
 var server = http.createServer(getURL);
 server.listen(port, hostname, function(err) {
     if (err) {
-        console.log(err);
+        console.log("Error starting server: " + err);
     }
     else {
         console.log("Server started. Listening on http://" + hostname + ":" + port);
