@@ -24,7 +24,7 @@ function getURL(request, response) {
 
     var xurl = request.url;
     response.statusCode = 200;
-    response.setHeader('Content-Type', 'text/plain');
+    response.setHeader('Content-Type', 'text/html');
     var type = processURL(xurl);
     var status;
 
