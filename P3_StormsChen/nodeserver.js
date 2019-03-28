@@ -182,7 +182,7 @@ function serveCGI(xurl, response) {
     // Create file path
     var execpath = XelkReq.execDir().concat(truncatedURL);
 
-    if (fs.existsSync(inputPath)) {
+    if (fs.existsSync(execpath)) {
         // Execute path
         executePath(execpath, response);
     }
