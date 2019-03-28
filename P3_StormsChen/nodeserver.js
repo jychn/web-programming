@@ -14,7 +14,8 @@ var exec = require('child_process').exec;
 
 // Defines the hostname and generated port
 var port = generatePort();
-var hostname = XelkReq.os.hostname();
+var hostname = "";
+XelkReq.logger(port, hostname);
 
 
 function getURL(request, response) {
