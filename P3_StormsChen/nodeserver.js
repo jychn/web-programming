@@ -13,8 +13,8 @@ var exec = require('child_process').exec;
 
 
 // Defines the hostname and generated port
-const hostname = 'iris.cs.uky.edu';
-const port = 8080; //generatePort();
+const hostname = 'iris.cs.uky.ed';
+const port = generatePort();
 
 
 function getURL(request, response) {
