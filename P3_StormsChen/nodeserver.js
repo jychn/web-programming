@@ -13,8 +13,9 @@ var exec = require('child_process').exec;
 
 
 // Defines the hostname and generated port
-const hostname = 'iris.cs.uky.edu';
-const port = generatePort();
+var port = generatePort();
+var hostname;
+XelkReq.logger(port, hostname);
 
 
 function getURL(request, response) {
@@ -243,6 +244,6 @@ server.listen(port, function(err) {
         console.log("Error starting server: " + err);
     }
     else {
-        console.log("Server started. Listening on http://" /*+ hostname*/ + ":" + port);
+        console.log("Server started. Listening on http://" + hostname + ":" + port);
     }
 });
