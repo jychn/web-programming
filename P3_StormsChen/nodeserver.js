@@ -123,28 +123,18 @@ function executePath(inputPath, response) {
 /* Function executes given path and writes corresponding output to server and
    client in both success and error. */
 
-    // Check to see if file exists
-    console.log(inputPath);
-    if (fs.existsSync(inputPath)) {
-        // Execute file using callback function and sending output to client
-        exec(inputPath, function (err, stdout, stderr) {
-            if (err) {
-                response.statusCode = 403;
-                console.log("Error executing file: " + err);
-                response.write("Error executing file: " + stderr);
-            }
-            else {
-                response.write(stdout);
-            }
-            response.end();
-        });
-    }
-    else {
-        response.statusCode = 403;
-        console.log("The URL is valid but the requested file does not exist.");
-        response.write("Your URL is valid but the file does not exist.\n")
+    // Execute file using callback function and sending output to client
+    exec(inputPath, function (err, stdout, stderr) {
+        if (err) {
+            response.statusCode = 403;
+            console.log("Error executing file: " + err);
+            response.write("Error executing file: " + stderr);
+        }
+        else {
+            response.write(stdout);
+        }
         response.end();
-    }
+    });
 }
 
 
@@ -192,8 +182,16 @@ function serveCGI(xurl, response) {
     // Create file path
     var execpath = XelkReq.execDir().concat(truncatedURL);
 
-    // Execute path
-    executePath(execpath, response);
+    if (fs.existsSync(inputPath)) {
+        // Execute path
+        executePath(execpath, response);
+    }
+    else {
+        response.statusCode = 403;
+        console.log("The URL is valid but the requested file does not exist.");
+        response.write("Your URL is valid but the file does not exist.\n")
+        response.end();
+    }
 }
 
 
