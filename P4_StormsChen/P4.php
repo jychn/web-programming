@@ -50,7 +50,7 @@ foreach($label_list as $item){
     <?php
     $index = 0;
     foreach($label_list as $item){
-      echo "<option value = '$item'>index</option>";
+      echo "<option value = '$item'>$item</option>";
       $index++;
     }
     ?>
