@@ -12,25 +12,41 @@ $searchables_list = [];
 foreach($games as $key => $value){
   foreach($value as $element){
     foreach($element as $ele_key => $ele_value){
-      //echo "$ele_key: ";
+      echo "$ele_key: ";
       if ($ele_key == "label"){
-        array_push($label_list, $ele_key);
+        array_push($label_list, $ele_value);
       }
       if (is_array($ele_value)){
         foreach($ele_value as $elements){
           array_push($searchables_list, $elements);
-          //echo "$elements ";
+          echo "$elements ";
         }
-        //echo "\n";
+        echo "\n";
       }
       else{
-      //  echo "$ele_value\n";
+        echo "$ele_value\n";
       }
     }
     //echo "\n";
   }
 }
-array_unique($searchables_list);
-array_unique($label_list);
 
+echo "\n";
+$searchables_list = array_unique($searchables_list);
+$label_list = array_unique($label_list);
+foreach($searchables_list as $item){
+  echo "$item ";
+}
+echo "\n";
+foreach($label_list as $item){
+  echo "$item ";
+}
+
+//html stuff after this
 ?>
+<html>
+<body>
+
+test
+</body>
+</html>
