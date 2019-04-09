@@ -57,6 +57,7 @@ foreach($label_list as $item){
     foreach($searchables_list as $item){
       echo "<option value = '$item'>$item</option>";
       $index++;
+    }
     ?>
   </select>
 </body>
