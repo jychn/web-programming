@@ -31,22 +31,30 @@ foreach($games as $key => $value){
   }
 }
 
-echo "\n";
+//echo "\n";
 $searchables_list = array_unique($searchables_list);
 $label_list = array_unique($label_list);
 foreach($searchables_list as $item){
-  echo "$item ";
+  //echo "$item ";
 }
-echo "\n";
+//echo "\n";
 foreach($label_list as $item){
-  echo "$item ";
+  //echo "$item ";
 }
 
 //html stuff after this
 ?>
 <html>
 <body>
-
+  <select>
+    <?php
+    $index = 0;
+    foreach($label_list as $item){
+      echo "<option value = '$item'>index</option>";
+      $index++;
+    }
+    ?>
+  </select>
 test
 </body>
 </html>
