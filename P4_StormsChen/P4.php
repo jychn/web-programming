@@ -53,8 +53,8 @@ foreach($label_list as $item){
       $index++;
     }
     ?>
+  </select>
   <br>
-</select>
   <select name = "searchField">
     <?php
     $index = 0;
@@ -66,5 +66,7 @@ foreach($label_list as $item){
   </select>
   <br>
   <input type="text" name = "criteria">
+  <br>
+  <input type="submit" name = "submit" value= "Submit">
 </body>
 </html>
