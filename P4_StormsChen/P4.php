@@ -1,4 +1,3 @@
-
 <?php
 error_reporting(E_ALL);
 
@@ -46,7 +45,7 @@ foreach($label_list as $item){
 ?>
 <html>
 <body>
-  <select>
+  <select name = "whichPlatform">
     <?php
     $index = 0;
     foreach($label_list as $item){
@@ -54,8 +53,9 @@ foreach($label_list as $item){
       $index++;
     }
     ?>
-  </select>
-  <select>
+  <br>
+</select>
+  <select name = "searchField">
     <?php
     $index = 0;
     foreach($searchables_list as $item){
@@ -64,5 +64,7 @@ foreach($label_list as $item){
     }
     ?>
   </select>
+  <br>
+  <input type="text" name = "criteria">
 </body>
 </html>
