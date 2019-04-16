@@ -32,8 +32,13 @@ function process_form(){
       foreach($title as $field => $value) {
         echo "
           <html>
-            <body>
-              $field: $value<br>";
+            <body>";
+        if ($value == $criteria) {
+            echo "<b>$field: $value</b><br>" // Add highlighting 
+        }
+        else {
+            echo "$field: $value<br>";
+        }
       }
     }
     echo "<br>";
