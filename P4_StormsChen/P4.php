@@ -33,7 +33,7 @@ function process_form(){
         echo "
           <html>
             <body>
-              $field: $info<br>";
+              $field: $value<br>";
       }
     }
     echo "<br>";
