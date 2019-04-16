@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_GET['value1'])){
+if (isset($_GET['criteria'])){
   process_form();
 }
 function process_form(){
