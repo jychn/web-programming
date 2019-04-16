@@ -22,10 +22,11 @@ function process_form(){
   $url = $url_list[$label_index];
   echo "$url";
   $info_string = file_get_contents($url);
-  $info_json = json_decode($info_string, true);
-  echo "$info_json";
 
-  echo "$label_index";
+  $info_json = json_decode($info_string, true);
+  #echo "$info_json";
+
+
 
 }
 
