@@ -29,10 +29,15 @@ function process_form(){
 
   foreach($info_json["titles"] as $title){
     foreach($title as $field => $info){
-      echo "$field: $info\n";
+      echo "
+        <html>
+          <body>
+            $field: $info<br>"
     }
-    echo "\n";
+    echo "<br>";
   }
+  echo "</body>
+        </html>"
 
 
 }
