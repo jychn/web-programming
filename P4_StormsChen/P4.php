@@ -18,6 +18,7 @@ function process_form(){
   $label_list = parse_php()[1];
   $url_list = parse_php()[0];
 
+
   $label_index = array_search($whichPlatform, $label_list);
   $url = $url_list[$label_index];
   echo "$url";
@@ -26,6 +27,11 @@ function process_form(){
   $info_json = json_decode($info_string, true);
   echo "$info_string";
 
+  foreach($info_json["titles"] as $title){
+    foreach($title as $field => $info){
+      echo "$field: $info";
+    }
+  }
 
 
 }
