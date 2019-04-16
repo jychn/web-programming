@@ -1,86 +1,97 @@
 <?php
 
-if (isset($_GET['criteria'])){
+error_reporting(E_ALL);
+
+if (isset($_GET['criteria'])){ //after submit
   process_form();
 }
+else{ //before submit
+  display_form();
+
+}
+
+function display_form(){
+
+  $label_list = parse_php()[0];
+  $searchables_list = parse_php()[1];
+  foreach($searchables_list as $item){
+    echo "$item ";
+  }
+  echo "\n";
+  foreach($label_list as $item){
+    echo "$item ";
+  }
+?>
+  <html>
+    <body>
+      <form action="P4.php" method="GET">
+        <select name = "whichPlatform">
+          <?php
+          $index = 0;
+          foreach($label_list as $item){
+            echo "<option value = '$item'>$item</option>";
+            $index++;
+          }
+          ?>
+        </select>
+        <br>
+        <select name = "searchField">
+          <?php
+          $index = 0;
+          foreach($searchables_list as $item){
+            echo "<option value = '$item'>$item</option>";
+            $index++;
+          }
+          ?>
+        </select>
+        <br>
+        <input type="text" name = "criteria">
+        <br>
+        <input type="submit" name = "submit" value= "Submit">
+      </form>
+    </body>
+  </html>
+
+}
+<?php
 function process_form(){
   $val1 = $_GET['criteria'];
   echo "$val1";
+
 }
-error_reporting(E_ALL);
 
-$gamesstring = file_get_contents("http://www.cs.uky.edu/~paul/public/Games.json");
+function parse_php(){
+  $gamesstring = file_get_contents("http://www.cs.uky.edu/~paul/public/Games.json");
 
-$games = json_decode($gamesstring, true);
-//need label list
-//need searchables list
-$label_list = [];
-$searchables_list = [];
-$url_list = [];
-foreach($games as $key => $value){
-  foreach($value as $element){
-    foreach($element as $ele_key => $ele_value){
-      #echo "$ele_key: ";
-      if ($ele_key == "url"){
-        array_push($url_list, $ele_value);
-      }
-      if ($ele_key == "label"){
-        array_push($label_list, $ele_value);
-      }
-      if (is_array($ele_value)){
-        foreach($ele_value as $elements){
-          array_push($searchables_list, $elements);
-          #echo "$elements ";
+  $games = json_decode($gamesstring, true);
+  $label_list = [];
+  $searchables_list = [];
+  $url_list = [];
+  foreach($games as $key => $value){
+    foreach($value as $element){
+      foreach($element as $ele_key => $ele_value){
+        if ($ele_key == "url"){
+          array_push($url_list, $ele_value);
         }
-        echo "\n";
-      }
-      else{
-        #echo "$ele_value\n";
+        if ($ele_key == "label"){
+          array_push($label_list, $ele_value);
+        }
+        if (is_array($ele_value)){
+          foreach($ele_value as $elements){
+            array_push($searchables_list, $elements);
+          }
+          echo "\n";
+        }
       }
     }
-    //echo "\n";
   }
-}
+  $label_list = array_unique($label_list);
+  $searchables_list = array_unique($searchables_list);
 
-//echo "\n";
-$searchables_list = array_unique($searchables_list);
-$label_list = array_unique($label_list);
-foreach($searchables_list as $item){
-  //echo "$item ";
-}
-//echo "\n";
-foreach($label_list as $item){
-  //echo "$item ";
-}
+  //return two arrays, searchables_list and label_list
 
+  $return_array = array(label_list,searchables_list);
+  return $return_array;
+}
 
 ?>
-<html>
-  <body>
-    <form action="P4.php" method="GET">
-      <select name = "whichPlatform">
-        <?php
-        $index = 0;
-        foreach($label_list as $item){
-          echo "<option value = '$item'>$item</option>";
-          $index++;
-        }
-        ?>
-      </select>
-      <br>
-      <select name = "searchField">
-        <?php
-        $index = 0;
-        foreach($searchables_list as $item){
-          echo "<option value = '$item'>$item</option>";
-          $index++;
-        }
-        ?>
-      </select>
-      <br>
-      <input type="text" name = "criteria">
-      <br>
-      <input type="submit" name = "submit" value= "Submit">
-    </form>
-  </body>
-</html>
