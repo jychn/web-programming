@@ -7,19 +7,33 @@ if (isset($_GET['criteria'])){ //after submit
 }
 else{ //before submit
   display_form();
+  $url_list = parse_php()[0];
+}
+
+function process_form(){
+  $whichPlatform = $_GET['whichPlatform'];
+  $searchField = $_GET['searchField'];
+  $criteria = $_GET['criteria'];
+
+  $label_list = parse_php()[1];
+  $url_list = parse_php()[0];
+
+  $label_index = array_search($whichPlatform, $label_list);
+
+  echo "$label_index";
 
 }
 
 function display_form(){
 
-  $label_list = parse_php()[0];
-  $searchables_list = parse_php()[1];
+  $label_list = parse_php()[1];
+  $searchables_list = parse_php()[2];
   foreach($searchables_list as $item){
-    echo "$item ";
+    #echo "$item ";
   }
-  echo "\n";
+  #echo "\n";
   foreach($label_list as $item){
-    echo "$item ";
+    #echo "$item ";
   }
 ?>
   <html>
@@ -54,12 +68,6 @@ function display_form(){
 <?php
 }
 
-function process_form(){
-  $val1 = $_GET['criteria'];
-  echo "$val1";
-
-}
-
 function parse_php(){
   $gamesstring = file_get_contents("http://www.cs.uky.edu/~paul/public/Games.json");
   $games = json_decode($gamesstring, true);
@@ -86,10 +94,10 @@ function parse_php(){
   }
   $label_list = array_unique($label_list);
   $searchables_list = array_unique($searchables_list);
+  $url_list = array_unique($url_list);
+  //return 3 arrays, url_list, label_list, and searchables_list
 
-  //return two arrays, searchables_list and label_list
-
-  $return_array = array($label_list,$searchables_list);
+  $return_array = array($url_list, $label_list, $searchables_list);
   return $return_array;
 }
 
