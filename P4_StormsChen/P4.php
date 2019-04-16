@@ -21,16 +21,17 @@ function process_form(){
 
   $label_index = array_search($whichPlatform, $label_list);
   $url = $url_list[$label_index];
-  echo "$url";
+
   $info_string = file_get_contents($url);
 
   $info_json = json_decode($info_string, true);
-  echo "$info_string";
+
 
   foreach($info_json["titles"] as $title){
     foreach($title as $field => $info){
-      echo "$field: $info";
+      echo "$field: $info\n";
     }
+    echo "\n";
   }
 
 
