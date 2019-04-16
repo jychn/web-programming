@@ -19,6 +19,11 @@ function process_form(){
   $url_list = parse_php()[0];
 
   $label_index = array_search($whichPlatform, $label_list);
+  $url = $url_list[$label_index];
+
+  $info_string = file_get_contents($url);
+  $info_json = json_decode($info_string, true);
+  echo "$info_json";
 
   echo "$label_index";
 
