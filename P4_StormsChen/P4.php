@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_GET['value1'])){
-  process_form()
+  process_form();
 }
 function process_form(){
   $val1 = $_GET['criteria'];
