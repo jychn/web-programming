@@ -19,7 +19,8 @@ function process_form(){
   $url_list = parse_php()[0];
 
 
-  $label_index = array_search($whichPlatform, $label_list);
+  $label_index = array_search($whichPlatform, $label_list); //this is AN ILLEGAL function
+
   $url = $url_list[$label_index];
 
   $info_string = file_get_contents($url);
@@ -39,9 +40,10 @@ function process_form(){
         else {
             echo "$field: $value<br>";
         }
+        echo "<br>";
       }
     }
-    echo "<br>";
+
   }
   echo "</body>
         </html>";
