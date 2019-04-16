@@ -8,10 +8,14 @@ $games = json_decode($gamesstring, true);
 //need searchables list
 $label_list = [];
 $searchables_list = [];
+$url_list = [];
 foreach($games as $key => $value){
   foreach($value as $element){
     foreach($element as $ele_key => $ele_value){
       #echo "$ele_key: ";
+      if ($ele_key == "url"){
+        array_push($url_list, $ele_value);
+      }
       if ($ele_key == "label"){
         array_push($label_list, $ele_value);
       }
@@ -41,7 +45,7 @@ foreach($label_list as $item){
   //echo "$item ";
 }
 
-//html stuff after this
+
 ?>
 <html>
 <body>
@@ -67,6 +71,6 @@ foreach($label_list as $item){
   <br>
   <input type="text" name = "criteria">
   <br>
-  <input type="submit" name = "submit" value= "Submit">
+  <input type="submit" name = "submit" value= "Submit" action="P4.php" method="GET">
 </body>
 </html>
