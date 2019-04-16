@@ -32,12 +32,12 @@ function process_form(){
       echo "
         <html>
           <body>
-            $field: $info<br>"
+            $field: $info<br>";
     }
     echo "<br>";
   }
   echo "</body>
-        </html>"
+        </html>";
 
 
 }
