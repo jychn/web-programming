@@ -24,7 +24,7 @@ function process_form(){
   $info_string = file_get_contents($url);
 
   $info_json = json_decode($info_string, true);
-  #echo "$info_json";
+  echo "$info_string";
 
 
 
