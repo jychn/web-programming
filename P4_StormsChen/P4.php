@@ -57,7 +57,7 @@ foreach($label_list as $item){
 ?>
 <html>
   <body>
-    <form action="https://www.cs.uky.edu/~wjst225/web-programming/P4_StormsChen/P4.php" method="GET">
+    <form action="P4.php" method="GET">
       <select name = "whichPlatform">
         <?php
         $index = 0;
