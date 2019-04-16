@@ -71,6 +71,6 @@ foreach($label_list as $item){
   <br>
   <input type="text" name = "criteria">
   <br>
-  <input type="submit" name = "submit" value= "Submit" action="P4.php" method="GET">
+  <input type="submit" name = "submit" value= "Submit" action="https://www.cs.uky.edu/~wjst225/web-programming/P4_StormsChen/P4.php" method="GET">
 </body>
 </html>
