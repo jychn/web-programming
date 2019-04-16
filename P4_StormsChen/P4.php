@@ -34,7 +34,7 @@ function process_form(){
           <html>
             <body>";
         if ($value == $criteria) {
-            echo "<b>$field: $value</b><br>"; // Add highlighting 
+            echo "<mark>$field: $value</mark><br>"; // Add highlighting
         }
         else {
             echo "$field: $value<br>";
