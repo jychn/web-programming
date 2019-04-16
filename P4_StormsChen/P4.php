@@ -1,4 +1,12 @@
 <?php
+
+if (isset($_GET['value1'])){
+  process_form()
+}
+function process_form(){
+  $val1 = $_GET['criteria'];
+  echo "$val1";
+}
 error_reporting(E_ALL);
 
 $gamesstring = file_get_contents("http://www.cs.uky.edu/~paul/public/Games.json");
@@ -49,7 +57,7 @@ foreach($label_list as $item){
 ?>
 <html>
   <body>
-    <form action="https://www.cs.uky.edu/~wjst225/web-programming/P4_StormsChen/P4.php" method="get">
+    <form action="https://www.cs.uky.edu/~wjst225/web-programming/P4_StormsChen/P4.php" method="GET">
       <select name = "whichPlatform">
         <?php
         $index = 0;
