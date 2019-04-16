@@ -51,9 +51,9 @@ function display_form(){
       </form>
     </body>
   </html>
-
-}
 <?php
+}
+
 function process_form(){
   $val1 = $_GET['criteria'];
   echo "$val1";
@@ -62,7 +62,6 @@ function process_form(){
 
 function parse_php(){
   $gamesstring = file_get_contents("http://www.cs.uky.edu/~paul/public/Games.json");
-
   $games = json_decode($gamesstring, true);
   $label_list = [];
   $searchables_list = [];
@@ -90,7 +89,7 @@ function parse_php(){
 
   //return two arrays, searchables_list and label_list
 
-  $return_array = array(label_list,searchables_list);
+  $return_array = array($label_list,$searchables_list);
   return $return_array;
 }
 
