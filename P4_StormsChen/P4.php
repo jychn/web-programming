@@ -48,29 +48,31 @@ foreach($label_list as $item){
 
 ?>
 <html>
-<body>
-  <select name = "whichPlatform">
-    <?php
-    $index = 0;
-    foreach($label_list as $item){
-      echo "<option value = '$item'>$item</option>";
-      $index++;
-    }
-    ?>
-  </select>
-  <br>
-  <select name = "searchField">
-    <?php
-    $index = 0;
-    foreach($searchables_list as $item){
-      echo "<option value = '$item'>$item</option>";
-      $index++;
-    }
-    ?>
-  </select>
-  <br>
-  <input type="text" name = "criteria">
-  <br>
-  <input type="submit" name = "submit" value= "Submit" action="https://www.cs.uky.edu/~wjst225/web-programming/P4_StormsChen/P4.php" method="GET">
-</body>
+  <body>
+    <form action="https://www.cs.uky.edu/~wjst225/web-programming/P4_StormsChen/P4.php" method="get">
+      <select name = "whichPlatform">
+        <?php
+        $index = 0;
+        foreach($label_list as $item){
+          echo "<option value = '$item'>$item</option>";
+          $index++;
+        }
+        ?>
+      </select>
+      <br>
+      <select name = "searchField">
+        <?php
+        $index = 0;
+        foreach($searchables_list as $item){
+          echo "<option value = '$item'>$item</option>";
+          $index++;
+        }
+        ?>
+      </select>
+      <br>
+      <input type="text" name = "criteria">
+      <br>
+      <input type="submit" name = "submit" value= "Submit">
+    </form>
+  </body>
 </html>
