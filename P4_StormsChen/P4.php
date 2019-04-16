@@ -28,18 +28,18 @@ function process_form(){
 
 
   foreach($info_json["titles"] as $title){
-    foreach($title as $field => $info){
-      echo "
-        <html>
-          <body>
-            $field: $info<br>";
+    if($title[$searchField] == $criteria){
+      foreach($title as $field => $value) {
+        echo "
+          <html>
+            <body>
+              $field: $info<br>";
+      }
     }
     echo "<br>";
   }
   echo "</body>
         </html>";
-
-
 }
 
 function display_form(){
