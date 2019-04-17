@@ -1,0 +1,22 @@
+CS 316
+Program 4A
+by William Storms and Jia-Yi Chen
+April 17, 2019
+
+References:
+    1. https://www.computerhope.com/issues/ch001391.htm
+        - Used to figure out how to highlight text
+    2. https://www.php.net/manual/en/function.is-string.php
+        - Used to figure out how to test if a variable is a string
+
+Collaboration:
+    1. None.
+
+Project URL:
+    1. https://www.cs.uky.edu/~jjch232/web-programming/P4_StormsChen/P4.php
+
+Description:
+    The project is a web application that has catalogued a number of
+    "Terran-based" games from the 1970's and 1980's. The database consists of
+    parsing numerous JSON files, and the database is searched in a similar
+    way.
